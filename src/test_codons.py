@@ -44,7 +44,7 @@ def test_translate_codons() -> None:
 
 def test_translate_dna() -> None:
     """Testing translate_dna()."""
-    assert translate_dna("ATGACCGAACAGTAG") == 'MTEQ*'
+    assert translate_dna("ATGACCGAACAGTAG") == 'MTEQA*'
     assert translate_dna("atgaccgaacagtag") == 'MTEQ*'
     assert translate_dna("atggaatag") == 'ME*'
 
@@ -56,3 +56,5 @@ def test_translate_dna() -> None:
 
     # Empty string
     assert translate_dna("") == ""
+
+test_translate_dna()

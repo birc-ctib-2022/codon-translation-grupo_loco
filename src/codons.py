@@ -20,7 +20,7 @@ CODON_MAP = {'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
              'GAT': 'D', 'GAC': 'D', 'GAA': 'E', 'GAG': 'E',
              'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'}
 
-dna="ATGACCGAACAA"
+#dna="ATGACCGAACAA"
 
 
 def split_codons(dna: str) -> list[str] | None:
@@ -50,7 +50,9 @@ def split_codons(dna: str) -> list[str] | None:
 
 
 def translate_codons(codons: list[str]) -> list[str]:
-    codon=[x.upper() for x in split_codons(dna)]
+    if codons== None:
+        return None
+    codon=[x.upper() for x in codons]#split_codons(dan)]
     aminoacid_sequence=[key for ele in codon for val, key in CODON_MAP.items() if ele in val]
     for key in codon:
         if key in CODON_MAP.keys():
@@ -82,7 +84,8 @@ def translate_codons(codons: list[str]) -> list[str]:
 
 
 def translate_dna(dna: str) -> str:
-    return translate_codons(dna)
+    aa = translate_codons(split_codons(dna))
+    return None if aa is None else "".join(aa)
     
     """Translate a DNA string into its corresponding amino acid string.
 
@@ -99,4 +102,4 @@ def translate_dna(dna: str) -> str:
     True
 
     """
-print(translate_dna(dna))
+print(translate_dna("accgata"))
