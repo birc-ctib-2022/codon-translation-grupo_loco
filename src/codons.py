@@ -102,4 +102,3 @@ def translate_dna(dna: str) -> str:
     True
 
     """
-print(translate_dna("accgata"))
