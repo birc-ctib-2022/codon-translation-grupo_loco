@@ -1,5 +1,8 @@
 """Module for translating DNA to proteins via codons."""
 
+from optparse import Values
+
+
 CODON_MAP = {'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
              'TCT': 'S', 'TCC': 'S', 'TCA': 'S', 'TCG': 'S',
              'TAT': 'Y', 'TAC': 'Y', 'TAA': '*', 'TAG': '*',
@@ -17,8 +20,16 @@ CODON_MAP = {'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
              'GAT': 'D', 'GAC': 'D', 'GAA': 'E', 'GAG': 'E',
              'GGT': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G'}
 
+#dna="ATGACCGAACAA"
+
 
 def split_codons(dna: str) -> list[str] | None:
+    if (len(dna)%3 != 0):
+        return None
+    codon=3
+    codons=[dna[i:i+codon] for i in range(0,len(dna),codon)]
+    
+    return codons
     """Split a DNA string into a list of triplets.
 
     If the length of the string is a multiple of tree, then this
@@ -36,35 +47,49 @@ def split_codons(dna: str) -> list[str] | None:
 
     """
     # FIXME: Implement the function
-    return []
+    return dna
+
+
 
 
 def translate_codons(codons: list[str]) -> list[str]:
-    """Translate a list of codons (triplets) into their corresponding
-    amino acid sequence.
+    if codons== None:
+        return None
+    codon=[x.upper() for x in codons]#split_codons(dan)]
+    aminoacid_sequence=[key for ele in codon for val, key in CODON_MAP.items() if ele in val]
+    for key in codon:
+        if key in CODON_MAP.keys():
+            continue
+        else:
+            return None
 
-    >>> translate_codons(['TGT', 'TGC', 'TGA'])
-    ['C', 'C', '*']
+    return aminoacid_sequence
 
-    The function must be able to handle both upper and lower case
-    strings.
+    #"""Translate a list of codons (triplets) into their corresponding amino acid sequence.
 
-    >>> translate_codons(['tgt', 'tgc', 'tga'])
-    ['C', 'C', '*']
+    #>>> translate_codons(['TGT', 'TGC', 'TGA'])
+    #['C', 'C', '*']
 
-    If the `codons` list contain anything that isn't a valid codon,
-    i.e. not in the CODON_MAP when translated into upper case, the
-    function should return `None`.
+    #The function must be able to handle both upper and lower case
+    #strings.
 
-    >>> translate_codons(["acg", "ac", "gca"]) is None
-    True
+    #>>> translate_codons(['tgt', 'tgc', 'tga'])
+    #['C', 'C', '*']
 
-    """
-    # FIXME: Implement the function
-    return []
+    #If the `codons` list contain anything that isn't a valid codon,
+    #i.e. not in the CODON_MAP when translated into upper case, the
+    #function should return `None`.
+
+    #>>> translate_codons(["acg", "ac", "gca"]) is None
+    #True
+
+    #"""
 
 
 def translate_dna(dna: str) -> str:
+    aa = translate_codons(split_codons(dna))
+    return None if aa is None else "".join(aa)
+    
     """Translate a DNA string into its corresponding amino acid string.
 
     >>> translate_dna('TGTTGCTGA')
@@ -80,5 +105,3 @@ def translate_dna(dna: str) -> str:
     True
 
     """
-    # FIXME: Implement the function
-    return ""

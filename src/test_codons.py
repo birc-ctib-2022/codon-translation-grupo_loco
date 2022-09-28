@@ -21,6 +21,7 @@ def test_split_codons() -> None:
     assert split_codons("") == []
 
 
+
 def test_translate_codons() -> None:
     """Testing translate_codons()."""
     assert translate_codons(
@@ -42,6 +43,7 @@ def test_translate_codons() -> None:
     assert translate_codons([]) == []
 
 
+
 def test_translate_dna() -> None:
     """Testing translate_dna()."""
     assert translate_dna("ATGACCGAACAGTAG") == 'MTEQ*'
@@ -56,3 +58,5 @@ def test_translate_dna() -> None:
 
     # Empty string
     assert translate_dna("") == ""
+
+test_translate_dna()
