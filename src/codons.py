@@ -24,8 +24,11 @@ CODON_MAP = {'TTT': 'F', 'TTC': 'F', 'TTA': 'L', 'TTG': 'L',
 
 
 def split_codons(dna: str) -> list[str] | None:
+    if (len(dna)%3 != 0):
+        return None
     codon=3
     codons=[dna[i:i+codon] for i in range(0,len(dna),codon)]
+    
     return codons
     """Split a DNA string into a list of triplets.
 
